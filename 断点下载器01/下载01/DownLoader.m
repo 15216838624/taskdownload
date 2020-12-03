@@ -15,7 +15,7 @@
 @property(nonatomic,strong)NSData *resumeData;
 @property(nonatomic,strong)NSURLSession *session;
 @property(nonatomic,strong) void(^downloadProgress)(CGFloat downloadProgress);
-@property(nonatomic,strong) void(^downloadsuccess)(BOOL success);
+@property(nonatomic,strong) void(^downloadsuccess)(NSString*savePath);
 /** 文件的缓存路径 */
 @property (nonatomic, copy) NSString *cacheFilePath;
 /** 文件的临时缓存路径 */
@@ -36,22 +36,16 @@
     }
     return _resumeData;
 }
-- (instancetype)init{
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
-                     
+              
 
-- (void)downLoadWithURL: (NSURL *)url progress:(void(^)(CGFloat progress))downloadprogress      completed:(void(^)(BOOL suceess))downLoadcompleted{
+- (void)downLoadWithURL: (NSURL *)url  progress:(void(^)(CGFloat progress))downloadprogress      success:(void(^)(NSString*savePath))successBlock  fail:(void(^)(NSError *error))faiilBlock{
     self.downloadProgress = downloadprogress;
-    self.downloadsuccess = downLoadcompleted;
+    self.downloadsuccess = successBlock;
     NSString *fileName = [[url.absoluteString md5Str]stringByAppendingPathExtension:url.pathExtension];
     self.cacheFilePath = [kCache stringByAppendingPathComponent:fileName];
     if ([LocalFileTool isFileExists:self.cacheFilePath]) {
-        NSLog(@"已下载:%@",self.cacheFilePath);
-        self.downloadsuccess(YES);
+        //NSLog(@"已下载:%@",self.cacheFilePath);
+        self.downloadsuccess(self.cacheFilePath);
         return;
     }
     self.tmpFilePath = [kTmpPath stringByAppendingPathComponent:fileName];
@@ -77,10 +71,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
     NSLog(@"%@下载进度:%f", downloadTask.currentRequest.URL,1.0 * totalBytesWritten / totalBytesExpectedToWrite);
     //self.downloadProgress(1.0 * totalBytesWritten / totalBytesExpectedToWrite);
     CGFloat progress = 1.0 * totalBytesWritten / totalBytesExpectedToWrite;
-   
     self.downloadProgress(progress);
-    
- 
 }
 
 -(void)URLSession:(nonnull NSURLSession *)session downloadTask:(nonnull NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes{
@@ -91,7 +82,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
     NSLog(@"下载完成");
     NSLog(@"%@",self.cacheFilePath);
     [LocalFileTool removeFileAtPath:self.tmpFilePath];
-    self.downloadsuccess(YES);
+    self.downloadsuccess(self.cacheFilePath);
     //self.downLoadSuccess(self.cacheFilePath);
 }
 
@@ -100,9 +91,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
         NSLog(@"%@",error);
         self.resumeData = nil;
         [LocalFileTool removeFileAtPath:self.tmpFilePath];
-        self.downloadsuccess(NO);
+        //self.downloadsuccess(NO);
     }
-   
 }
 
 

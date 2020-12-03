@@ -34,7 +34,7 @@
 		608E3A59257777C80038745D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		608E3A5A257777C80038745D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		608E3A67257781C40038745D /* DownLoadManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownLoadManger.h; sourceTree = "<group>"; };
-		608E3A68257781C40038745D /* DownLoadManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoadManger.m; sourceTree = "<group>"; };
+		608E3A68257781C40038745D /* DownLoadManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoadManger.m; sourceTree = "<group>"; wrapsLines = 0; };
 		608E3A6B2577836B0038745D /* DownLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownLoader.h; sourceTree = "<group>"; };
 		608E3A6C2577836B0038745D /* DownLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoader.m; sourceTree = "<group>"; };
 		608E3A6F257783AA0038745D /* LocalFileTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalFileTool.h; sourceTree = "<group>"; };

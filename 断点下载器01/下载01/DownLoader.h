@@ -11,9 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DownLoader : NSObject
 
-- (void)downLoadWithURL: (NSURL *)url progress:(void(^)(CGFloat progress))downloadprogress      completed:(void(^)(BOOL suceess))downLoadcompleted;
+- (void)downLoadWithURL: (NSURL *)url  progress:(void(^)(CGFloat progress))downloadprogress      success:(void(^)(NSString*savePath))successBlock  fail:(void(^)(NSError *error))faiilBlock;
 - (void)pause;
-- (void)resume;
 @end
 
 NS_ASSUME_NONNULL_END

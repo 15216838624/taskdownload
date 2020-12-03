@@ -35,11 +35,26 @@
 
 - (void)begindownload{
     
+//    [[DownLoadManger shareInstance]downLoadWithURL:[NSURL URLWithString:@"https://softforspeed.51xiazai.cn/down/1__3112605__3f7372633d6c6d266c733d6e35646135366261623964__68616f2e3336302e636e__0cf9.exe"] progress:^(CGFloat progress) {
+//        NSLog(@"%f",progress);
+//        } completed:^(BOOL suceess) {
+//            //NSLog(@"%d",suceess);
+//        }];
+//
+    
     [[DownLoadManger shareInstance]downLoadWithURL:[NSURL URLWithString:@"https://softforspeed.51xiazai.cn/down/1__3112605__3f7372633d6c6d266c733d6e35646135366261623964__68616f2e3336302e636e__0cf9.exe"] progress:^(CGFloat progress) {
-        NSLog(@"%f",progress);
-        } completed:^(BOOL suceess) {
-            //NSLog(@"%d",suceess);
-        }];
+        
+    } success:^(NSString * _Nonnull savePath) {
+        NSLog(@"%@",savePath);
+    } fail:^(NSError * _Nonnull error) {
+
+        
+    }];
+    
+    
+    
+    
+    
     
     
     // Do any additional setup after loading the view.
@@ -53,6 +68,6 @@
 }
 
 - (void)pausedownload{
-//    [[DownLoadManger shareInstance]pauseWithURL:[NSURL URLWithString:@"https://softforspeed.51xiazai.cn/down/1__3112605__3f7372633d6c6d266c733d6e35646135366261623964__68616f2e3336302e636e__0cf9.exe"]];
+    [[DownLoadManger shareInstance]pauseWithURL:[NSURL URLWithString:@"https://softforspeed.51xiazai.cn/down/1__3112605__3f7372633d6c6d266c733d6e35646135366261623964__68616f2e3336302e636e__0cf9.exe"]];
 }
 @end

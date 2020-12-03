@@ -12,15 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DownLoadManger : NSObject
 + (instancetype)shareInstance;
 
-- (void)downLoadWithURL: (NSURL *)url  progress:(void(^)(CGFloat progress))downloadprogress      completed:(void(^)(BOOL suceess))downLoadcompleted;
+- (void)downLoadWithURL: (NSURL *)url  progress:(void(^)(CGFloat progress))downloadprogress      success:(void(^)(NSString*savePath))successBlock  fail:(void(^)( NSError *  error))faiilBlock;
 
 - (void)pauseWithURL: (NSURL *)url;
 
-//- (nullable SDWebImageDownloadToken *)downloadImageWithURL:(nullable NSURL *)url
-//                                                   options:(SDWebImageDownloaderOptions)options
-//                                                   context:(nullable SDWebImageContext *)context
-//                                                  progress:(nullable SDWebImageDownloaderProgressBlock)progressBlock
-//                                                 completed:(nullable SDWebImageDownloaderCompletedBlock)completedBloc
 @end
 
 NS_ASSUME_NONNULL_END
